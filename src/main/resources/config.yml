@@ -1,0 +1,9 @@
+# Configuration for the BossBarHP plugin
+# Time in seconds until the bar for the mob disappears (after the last hit)
+display-time: 5
+# The name to be displayed above the boss bar. Use § for colour codes (IE §a). You can put in %name% which will be replaced with the name of the entity. This value should always be in apostrophes.
+format: '%name%'
+# The colour of the bar to be used. Acceptable values are: PINK, BLUE, RED, GREEN, YELLOW, PURPLE and WHITE
+bar-colour: 'RED'
+# The style of the bar to be used. Acceptable values are: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+bar-style: 'SOLID'

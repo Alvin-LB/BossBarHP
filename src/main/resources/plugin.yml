@@ -1,0 +1,21 @@
+name: 'BossBarHP'
+main: com.bringholm.bossbarhp.Main
+version: '1.0'
+commands:
+  bossbar:
+    description: |
+      /bossbar toggle - toggles the mob health bar on or off.
+      /bossbar reload - reloads the config.
+    usage: /bossbar <toggle|reload>
+permissions:
+  bossbarhp.*:
+    description: Gives access to all BossBarHP permissions.
+    children:
+      bossbarhp.reload: true
+      bossbarhp.toggle: true
+  bossbarhp.reload:
+    description: Gives access to /bossbar reload.
+    default: op
+  bossbarhp.toggle:
+    description: Gives access to /bossbar toggle.
+    default: true
