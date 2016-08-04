@@ -5,13 +5,15 @@ https://dev.bukkit.org/bukkit-plugins/bossbarhp/
 BossBarHP is a very simple plugin. It lets you display the health of any mob you hit in a boss bar at the top of the screen. It was made based on a request on the bukkit forums.
 
 ## Features
--Configurable title to the bossbar.
--Option to toggle the bossbar.
--Ability to change style and colour of the bar.
+- Configurable title to the bossbar.
+- Option to toggle the bossbar.
+- Ability to change style and colour of the bar.
+
 ## Commands/Permissions
--/bossbar reload - Reloads the plugins configuration file. Permission node: bossbar.reload Only operators have this permission by -default.
--/bossbar toggle - Toggles the bossbar for the individual user. Permission node: bossbar.toggle Everyone has this permission by default.
--bossbar.* - Gives access to all permissions of this plugin.
+- /bossbar reload - Reloads the plugins configuration file. Permission node: bossbar.reload Only operators have this permission by default.
+- /bossbar toggle - Toggles the bossbar for the individual user. Permission node: bossbar.toggle Everyone has this permission by default.
+- bossbar.* - Gives access to all permissions of this plugin.
+
 ## Configuration
 ```
 # Configuration for the BossBarHP plugin
@@ -25,7 +27,8 @@ bar-colour: 'RED'
 bar-style: 'SOLID'
 ```
 ## Screenshots
-http://i.imgur.com/hJmhvk9.png http://i.imgur.com/HtvYG4o.png
+![alt text](http://i.imgur.com/hJmhvk9.png)
+![alt text](http://i.imgur.com/HtvYG4o.png)
 
 ## Other
 Have you found a bug/want to make a feature request? Post an issue on the GitHub page! You can also submit a PullRequest if you feel like coding!
