@@ -14,6 +14,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -92,17 +93,16 @@ public class Main extends JavaPlugin implements Listener {
                         BossBar bossBar = Bukkit.createBossBar(bossBarString.replace("%name%", e.getEntity().getName()), barColor, barStyle);
                         bossBar.addPlayer(player);
                         bossBarHashMap.put(player.getUniqueId(), bossBar);
-                        currentEntityTarget.put(entity.getUniqueId(), player.getUniqueId());
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (entity.getHealth() != 0) {
-                                    bossBar.setProgress(entity.getHealth() / entity.getMaxHealth());
-                                    bossBar.setTitle(bossBarString.replace("%name%", e.getEntity().getName()));
-                                }
-                            }
-                        }.runTaskLater(this, 1L);
+                        double entityHealth = entity.getHealth() - e.getDamage();
+                        if (entityHealth > 0) {
+                            bossBar.setProgress(entityHealth / entity.getMaxHealth());
+                            bossBar.setTitle(bossBarString.replace("%name%", e.getEntity().getName()));
+                        }
                     }
+                    if (currentEntityTarget.containsValue(player.getUniqueId())) {
+                        currentEntityTarget.values().remove(player.getUniqueId());
+                    }
+                    currentEntityTarget.put(entity.getUniqueId(), player.getUniqueId());
                     if (currentRunnables.containsKey(player.getUniqueId())) {
                         currentRunnables.get(player.getUniqueId()).cancel();
                         currentRunnables.remove(player.getUniqueId());
@@ -139,30 +139,26 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onEntityDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof LivingEntity) {
             if (currentEntityTarget.containsKey(e.getEntity().getUniqueId())) {
                 Player player = Bukkit.getPlayer(currentEntityTarget.get(e.getEntity().getUniqueId()));
                 LivingEntity entity = (LivingEntity) e.getEntity();
                 BossBar bossBar = bossBarHashMap.get(player.getUniqueId());
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        if (entity.getHealth() != 0) {
-                            bossBar.setProgress(entity.getHealth() / entity.getMaxHealth());
-                            bossBar.setTitle(bossBarString.replace("%name%", e.getEntity().getName()));
-                        } else {
-                            bossBar.removePlayer(player);
-                            bossBarHashMap.remove(player.getUniqueId());
-                            currentEntityTarget.remove(entity.getUniqueId());
-                            if (currentRunnables.containsKey(player.getUniqueId())) {
-                                currentRunnables.get(player.getUniqueId()).cancel();
-                                currentRunnables.remove(player.getUniqueId());
-                            }
-                        }
+                double entityHealth = entity.getHealth() - e.getDamage();
+                if (entityHealth > 0) {
+                    bossBar.setProgress(entityHealth / entity.getMaxHealth());
+                    bossBar.setTitle(bossBarString.replace("%name%", e.getEntity().getName()));
+                } else {
+                    bossBar.removePlayer(player);
+                    bossBarHashMap.remove(player.getUniqueId());
+                    currentEntityTarget.remove(entity.getUniqueId());
+                    if (currentRunnables.containsKey(player.getUniqueId())) {
+                        currentRunnables.get(player.getUniqueId()).cancel();
+                        currentRunnables.remove(player.getUniqueId());
                     }
-                }.runTaskLater(this, 1L);
+                }
             }
         }
     }
