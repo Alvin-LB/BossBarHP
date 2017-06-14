@@ -1,9 +1,33 @@
 # Configuration for the BossBarHP plugin
 # Time in seconds until the bar for the mob disappears (after the last hit)
 display-time: 5
-# The name to be displayed above the boss bar. Use § for colour codes (IE §a). You can put in %name% which will be replaced with the name of the entity. This value should always be in apostrophes.
+# The name to be displayed above the boss bar. Use § for colour codes (IE §a). You can put in %name% which will be replaced with the name of the entity.
+# This value should always be in apostrophes.
 format: '%name%'
 # The colour of the bar to be used. Acceptable values are: PINK, BLUE, RED, GREEN, YELLOW, PURPLE and WHITE
 bar-colour: 'RED'
 # The style of the bar to be used. Acceptable values are: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
 bar-style: 'SOLID'
+
+# Custom rules for certain entities of the boss bar. Allows for each individual entity type to have its own settings. The values are the same as above.
+# If a custom rule does not exist for a certain entity type, the one configured above is used.
+# The custom rules are structured like this:
+# custom-rules:
+#   <entity id>:
+#     format: 'value'
+#     bar-colour: 'value'
+#     bar-style: 'value'
+
+# NOTE: Indentations must be at least two spaces to be valid (tabs do not count).
+
+# Example:
+# custom-rules:
+#   pig:
+#     format: '%name%'
+#     bar-colour: 'PINK'
+#     bar-style: 'SEGMENTED_20'
+
+# The entity IDs are found in this table in the 'Savegame ID' column:
+# https://minecraft.gamepedia.com/Data_values/Entity_IDs
+# In addition to these, there are also two custom defined ones, 'animal' and 'monster'. Note that any specific type will take precedence over animal and monster.
+custom-rules: {}

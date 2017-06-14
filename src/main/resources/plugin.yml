@@ -1,6 +1,6 @@
 name: 'BossBarHP'
-main: com.bringholm.bossbarhp.Main
-version: '1.0'
+main: com.bringholm.bossbarhp.BossBarHP
+version: '1.2'
 commands:
   bossbar:
     description: |

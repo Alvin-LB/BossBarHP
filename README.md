@@ -1,6 +1,7 @@
 # BossBarHP
 Source code for the Bukkit Plugin BossBarHP, developed by AlvinLB. BukkitDev page:
 https://dev.bukkit.org/bukkit-plugins/bossbarhp/
+
 ##What is it?
 BossBarHP is a very simple plugin. It lets you display the health of any mob you hit in a boss bar at the top of the screen. It was made based on a request on the bukkit forums.
 
@@ -31,4 +32,4 @@ bar-style: 'SOLID'
 ![alt text](http://i.imgur.com/HtvYG4o.png)
 
 ## Other
-Have you found a bug/want to make a feature request? Post an issue on the GitHub page! You can also submit a PullRequest if you feel like coding!
+Have you found a bug/want to make a feature request? Post an issue! You can also submit a PullRequest if you feel like coding!
